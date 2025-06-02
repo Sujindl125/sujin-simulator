@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💖 수진 시뮬레이터 💖</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      font-size: 2em;
+      color: #ff69b4;
+      margin-bottom: 20px;
+    }
+    #chat-box {
+      width: 90%;
+      max-width: 500px;
+      height: 300px;
+      border: 3px solid #ff69b4;
+      margin: 0 auto 20px;
+      padding: 10px;
+      background-color: #111;
+      overflow-y: auto;
+      border-radius: 15px;
+    }
+    #input-box {
+      width: 70%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    #send-btn, #end-btn {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 수진 시뮬레이터 💖</h1>
+  <div id="chat-box"></div>
+  <input type="text" id="input-box" placeholder="영진이 말 입력해봐!"/>
+  <button id="send-btn">전송</button>
+  <button id="end-btn">대화 종료</button>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const inputBox = document.getElementById("input-box");
+    const sendBtn = document.getElementById("send-btn");
+    const endBtn = document.getElementById("end-btn");
+
+    const responses = [
+      "응? 진짜 그렇게 생각해? 💭",
+      "앙~ 귀여워 죽겠어 🫶",
+      "영진이는 오늘도 최고야!",
+      "또 보고싶어... 지금도 보고싶어 💗",
+      "그런 말 하면 심장 폭행이야!! 💥💘"
+    ];
+
+    function appendMessage(sender, message) {
+      const msg = document.createElement("p");
+      msg.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", () => {
+      const userMsg = inputBox.value.trim();
+      if (userMsg === "") return;
+      appendMessage("영진", userMsg);
+      inputBox.value = "";
+
+      setTimeout(() => {
+        const response = responses[Math.floor(Math.random() * responses.length)];
+        appendMessage("수진", response);
+      }, 1000);
+    });
+
+    endBtn.addEventListener("click", () => {
+      appendMessage("수진", "대화 종료! 오늘도 사랑해 💕");
+    });
+  </script>
+</body>
+</html>
